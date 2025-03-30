@@ -68,3 +68,34 @@ This is a React-based weather application that provides current weather informat
 5.  A map will be displayed showing the searched location.
 
 ## Project Structure
+
+weather-app/
+├── public/
+│   └── index.html
+├── src/
+│   ├── components/
+│   │   ├── Weather.jsx
+│   │   └── ... (other components)
+│   ├── assets/
+│   │   ├── search-icon.png
+│   │   ├── ... (other assets)
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── ... (other source files)
+├── .env.local
+├── package.json
+├── package-lock.json
+├── vite.config.js
+└── README.md
+
+## Contributing
+
+Contributions are welcome! If you have any suggestions or bug reports, please open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Author
+
+Aryan Bose
