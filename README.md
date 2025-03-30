@@ -1,70 +1,80 @@
 # WeatherWise
 
-This is a React-based weather application that provides current weather information and a 5-day forecast for a user-specified city.
+"I've built a weather application with real-time data, five-day forecasts, and interactive location maps. You can view it here: https://theweatherwise.netlify.app/
+
+This is a dynamic weather application built with React, providing real-time weather information and forecasts for cities worldwide. It features an intuitive user interface with current weather details, a five-day forecast, and an interactive map pinpointing the searched location.
 
 ## Features
 
--   **Current Weather:** Displays temperature, location, weather description, humidity, wind speed, and "feels like" temperature.
--   **5-Day Forecast:** Shows the weather forecast for the next 5 days, including date, weather icon, temperature, humidity, wind speed, and description.
--   **Dynamic Background:** Changes the background gradient based on the time of day at the searched location.
--   **Search Functionality:** Allows users to search for weather information by city name.
--   **Error Handling:** Provides user-friendly error messages for invalid city names.
--   **Responsive Design:** Ensures the app is usable on various screen sizes.
--   **Map Integration:** Displays the searched location on a map using the Google Maps JavaScript API.
--   **Enter Key Search:** Allows users to search by pressing the Enter key in the input field.
+-   **Real-time Weather Data:** Displays current weather conditions, including temperature, humidity, wind speed, and cloud cover.
+-   **Five-Day Forecast:** Provides a five-day weather forecast, showing temperature, weather description, and other relevant information.
+-   **Interactive Map:** Integrates an interactive map using `react-leaflet`, pinpointing the searched location.
+-   **User-Friendly Interface:** Features a clean and intuitive design, making it easy to access weather information.
+-   **City Search:** Allows users to search for weather information by city name.
+-   **Dynamic Background:** Changes the application background based on the time of day at the searched location.
 
 ## Technologies Used
 
--   React
--   JavaScript
--   CSS
--   OpenWeatherMap API
--   React Icons
--   SweetAlert2
+-   **React:** A JavaScript library for building user interfaces.
+-   **OpenWeatherMap API:** For fetching real-time weather data and forecasts.
+-   **react-leaflet:** A React wrapper for Leaflet, used for map integration.
+-   **React Icons:** For weather and data icons.
+-   **SweetAlert2:** For user-friendly error messages.
 
-## Installation
+## Setup
 
-1.  **Clone the repository:**
-
-    ```bash
-    git clone <repository_url>
-    ```
-
-2.  **Navigate to the project directory:**
+1.  **Clone the Repository:**
 
     ```bash
-    cd <project_directory>
+    git clone [repository-url]
+    cd [project-directory]
     ```
 
-3.  **Install dependencies:**
+2.  **Install Dependencies:**
 
     ```bash
     npm install
     ```
 
-4.  **Create a `.env.local` file in the root directory and add your API keys:**
+3.  **Set Up Environment Variables:**
 
-    ```
-    VITE_APP_ID=YOUR_OPENWEATHERMAP_API_KEY
-    ```
+    -   Create a `.env.local` file in the root directory.
+    -   Add your OpenWeatherMap API key:
 
-    Replace `YOUR_OPENWEATHERMAP_API_KEY` and `YOUR_GOOGLE_MAPS_API_KEY` with your actual API keys.
+        ```
+        VITE_APP_ID=your_api_key
+        ```
 
-5.  **Run the application:**
+    -   Replace `your_api_key` with your actual API key.
+
+4.  **Run the Application:**
 
     ```bash
     npm run dev
     ```
 
-    The application will be available at `http://localhost:5173/` (or the port specified by Vite).
+    -   The application will be available at `http://localhost:5173` (or the port Vite specifies).
 
 ## Usage
 
 1.  Enter a city name in the search bar.
-2.  Press Enter or click the search icon.
-3.  The app will display the current weather and 5-day forecast for the specified city.
-4.  The background will change based on the time of day at the searched location.
-5.  A map will be displayed showing the searched location.
+2.  Click the search icon or press Enter.
+3.  The application will display the current weather and a five-day forecast for the searched city.
+4.  An interactive map will also display the location of the searched city.
+
+## Notes
+
+-   Ensure you have a valid OpenWeatherMap API key.
+-   The application requires an internet connection to fetch weather data.
+-   The map functionality relies on `react-leaflet` and Leaflet, which require proper setup and image handling.
+
+## Future Improvements
+
+-   Add more detailed weather information.
+-   Implement location-based weather updates.
+-   Improve the user interface and responsiveness.
+-   Add support for different units (e.g., Fahrenheit).
+-   Include more map features, such as zoom controls and different tile layers.
 
 ## Project Structure
 
