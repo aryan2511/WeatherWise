@@ -5,12 +5,23 @@ import { CiCloudOn } from "react-icons/ci";
 import { FaWind, FaSearchLocation } from "react-icons/fa";
 import search_icon from "../assets/search.png";
 import Swal from "sweetalert2";
+import Forecast from "./Forecast";
+import LocationMap from "./LocationMap";
 
 const WeatherService = () => {
   const inputRef = useRef();
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && inputRef.current) {
+      search(inputRef.current.value);
+    }
+  };
+
   const [weatherData, setWeatherData] = useState(false);
   const [forecastData, setForecastData] = useState(false);
   const [backgroundStyle, setBackgroundStyle] = useState({});
+  const [locationCoordinates, setLocationCoordinates] = useState(null);
+  const [locationName, setLocationName] = useState(null);
 
   const search = async (city) => {
     try {
@@ -36,8 +47,10 @@ const WeatherService = () => {
       const current_data = await currentResponse.json();
       const forecast_data = await forecastResponse.json();
 
+      // checking if the api is able to fetch data below
       // console.log(current_data);
       // console.log(forecast_data);
+
       // Fetch timezone offset
       const timezoneOffsetSeconds = current_data.timezone;
       const timezoneOffsetMilliseconds = timezoneOffsetSeconds * 1000;
@@ -72,6 +85,9 @@ const WeatherService = () => {
       } else {
         setForecastData(null); // Or set to a default state
       }
+
+      setLocationCoordinates([current_data.coord.lat, current_data.coord.lon]);
+      setLocationName(current_data.name);
     } catch (error) {
       Swal.fire({
         title: "PLEASE CHECK THE CITY NAME AND TRY AGAIN",
@@ -80,15 +96,12 @@ const WeatherService = () => {
       });
       setWeatherData(null);
       setForecastData(null);
+      setLocationCoordinates(null);
+      setLocationName(null);
     }
   };
 
-  // useEffect(() => {
-  //   search("");
-  // }, [""]);
-
   useEffect(() => {
-    // Clear input field on mount
     if (inputRef.current) {
       inputRef.current.value = "";
     }
@@ -122,19 +135,23 @@ const WeatherService = () => {
         backgroundImage: "linear-gradient(45deg, #034B63, #4682B4)", // Dark blue gradient
       };
     }
-    // console.log("Background Style:", bgStyle);
 
     setBackgroundStyle(bgStyle);
   };
 
   useEffect(() => {
-    updateBackground(0); // 0 offset for local time
+    updateBackground(0);
   }, []);
 
   return (
     <div className="weather" style={backgroundStyle}>
       <div className="search-bar">
-        <input ref={inputRef} type="text" placeholder="SEARCH" />
+        <input
+          ref={inputRef}
+          type="text"
+          placeholder="SEARCH"
+          onKeyDown={handleKeyDown}
+        />
         <img
           src={search_icon}
           alt="s"
@@ -179,41 +196,16 @@ const WeatherService = () => {
             </>
           )}
         </div>
-
-        <div className="forecast-data">
-          {forecastData && (
-            <>
-              <h3>Weekly Forecast</h3>
-              {forecastData.map((item, index) => (
-                <div key={index} className="forecast-item">
-                  <img
-                    src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
-                    alt={item.weather[0].description}
-                    className="forecast-icon"
-                  />
-                  <div className="temp-data">
-                    <WiThermometer size={20} color="#fff" />
-                    <p>{Math.floor(item.main.temp)}°C</p>
-                  </div>
-                  <div className="humidity-data">
-                    <WiHumidity size={20} color="#fff" />
-                    <p>{item.main.humidity}%</p>
-                  </div>
-                  <div className="wind-data">
-                    <FaWind size={20} color="#fff" />
-                    <p>{item.wind.speed} m/s</p>
-                  </div>
-                  <p className="description">
-                    {item.weather[0].description.toUpperCase()}
-                  </p>
-                </div>
-              ))}
-            </>
-          )}
-        </div>
+        {forecastData && <Forecast forecastData={forecastData} />}
       </div>
-
       {!weatherData && <p>ENTER A CITY TO SEE THE WEATHER FORECAST.</p>}
+
+      <br />
+      <br />
+      <LocationMap
+        locationCoordinates={locationCoordinates}
+        locationName={locationName}
+      />
     </div>
   );
 };
