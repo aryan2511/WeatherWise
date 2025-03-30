@@ -46,7 +46,6 @@ This is a React-based weather application that provides current weather informat
 
     ```
     VITE_APP_ID=YOUR_OPENWEATHERMAP_API_KEY
-    VITE_APP_GOOGLE_MAPS_API_KEY=YOUR_GOOGLE_MAPS_API_KEY
     ```
 
     Replace `YOUR_OPENWEATHERMAP_API_KEY` and `YOUR_GOOGLE_MAPS_API_KEY` with your actual API keys.
@@ -69,7 +68,7 @@ This is a React-based weather application that provides current weather informat
 
 ## Project Structure
 
-weather-app/
+```weather-app/
 ├── public/
 │   └── index.html
 ├── src/
@@ -87,6 +86,7 @@ weather-app/
 ├── package-lock.json
 ├── vite.config.js
 └── README.md
+```
 
 ## Contributing
 
